@@ -26,7 +26,7 @@ with st.form(key="Population data"):
 
     button = st.form_submit_button("Analyze")
 
-outcome = True
+outcome = False
 if button:
     quarter_years = [f"{col1_quarter} {col1_year}", f"{col2_quarter} {col2_year}"]
     outcome = all(quarter_year in data['Quarter'].values for quarter_year in quarter_years)
@@ -35,7 +35,6 @@ if button:
 
     if col1_year > col2_year:
         st.warning(f"Dates don't work. Start date must come before end date.")
-        outcome = False
 
 
 # tabs
