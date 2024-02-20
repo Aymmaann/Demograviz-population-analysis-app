@@ -38,9 +38,8 @@ if button:
 
 
 # tabs
+tab1, tab2 = st.tabs(["Population change", "Compare"])
 if outcome:
-    tab1, tab2 = st.tabs(["Population change", "Compare"])
-
     with tab1:
         st.subheader(f"Population change from {col1_quarter} {col1_year} to {col2_quarter} {col2_year}")
         col1, col2 = st.columns(2)
@@ -62,14 +61,14 @@ if outcome:
         fig.autofmt_xdate()
         col2.pyplot(fig)
 
-    with tab2:
-        selection = st.multiselect("Choose other locations", options=data.columns[1:], default="Canada")
-        fig, ax = plt.subplots()
-        ax.plot(data.Quarter, data[selection])
-        ax.set_xlabel("Time")
-        ax.set_ylabel("Population")
-        x_labels = ['Q3 1991', 'Q1 2023']
-        ax.set_xticks(data[data['Quarter'].isin(x_labels)]['Quarter'])
-        ax.set_xticklabels(x_labels)
-        fig.autofmt_xdate()
-        st.pyplot(fig)
+with tab2:
+    selection = st.multiselect("Choose other locations", options=data.columns[1:], default="Canada")
+    fig, ax = plt.subplots()
+    ax.plot(data.Quarter, data[selection])
+    ax.set_xlabel("Time")
+    ax.set_ylabel("Population")
+    x_labels = ['Q3 1991', 'Q1 2023']
+    ax.set_xticks(data[data['Quarter'].isin(x_labels)]['Quarter'])
+    ax.set_xticklabels(x_labels)
+    fig.autofmt_xdate()
+    st.pyplot(fig)
